@@ -20,6 +20,8 @@ namespace CrystalDuelingEngine.Tags
 
 		public override string SerializationName => nameof(IntValueTag);
 
+		public int? Value { get; }
+
 		public override TagBase Clone()
 		{
 			return new IntValueTag(this);
@@ -34,8 +36,6 @@ namespace CrystalDuelingEngine.Tags
 		{
 			return new IntValueTag(this, duration);
 		}
-
-		public int? Value { get; }
 
 		public IAddableTag AddTag(IAddableTag tag)
 		{

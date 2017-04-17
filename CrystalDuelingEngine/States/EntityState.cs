@@ -108,9 +108,9 @@ namespace CrystalDuelingEngine.States
 			var workspace = new TagCollection(this);
 			attackState.SetDynamicTags(TagScope.TemporaryWorkspace, workspace);
 
-			ReadOnlyCollection<ConditionTag> entityLimitTags = Tags.Tags
+			ReadOnlyCollection<ConditionTagBase> entityLimitTags = Tags.Tags
 				.Concat(battleState.Tags.Tags)
-				.OfType<ConditionTag>()
+				.OfType<ConditionTagBase>()
 				.Where(x => x.Key == SystemTagUtility.ActionLimitKey)
 				.ToList()
 				.AsReadOnly();
@@ -121,7 +121,7 @@ namespace CrystalDuelingEngine.States
 				if (entityLimitTags.Count != 0 && entityLimitTags.Any(x => !x.IsTrue(attackState)))
 					return false;
 
-				ReadOnlyCollection<ConditionTag> actionLimitTags = action.Tags.OfType<ConditionTag>().Where(x => x.Key == SystemTagUtility.ActionLimitKey).ToList().AsReadOnly();
+				ReadOnlyCollection<ConditionTagBase> actionLimitTags = action.Tags.OfType<ConditionTagBase>().Where(x => x.Key == SystemTagUtility.ActionLimitKey).ToList().AsReadOnly();
 				return actionLimitTags.Count == 0 || actionLimitTags.All(x => x.IsTrue(attackState));
 			}).ToList().AsReadOnly();
 		}

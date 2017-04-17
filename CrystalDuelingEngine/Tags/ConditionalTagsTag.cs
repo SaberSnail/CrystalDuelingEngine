@@ -4,7 +4,7 @@ using CrystalDuelingEngine.Serialization;
 
 namespace CrystalDuelingEngine.Tags
 {
-	public sealed class ConditionalTagsTag : ConditionTag
+	public sealed class ConditionalTagsTag : ConditionTagBase
 	{
 		public ConditionalTagsTag(string key, ConditionBase condition, IEnumerable<TagBase> tags)
 			: this(key, condition, tags, null)
@@ -18,6 +18,8 @@ namespace CrystalDuelingEngine.Tags
 		}
 
 		public override string SerializationName => nameof(ConditionalTagsTag);
+
+		public TagCollection Tags { get; }
 
 		public override TagBase Clone()
 		{
@@ -33,8 +35,6 @@ namespace CrystalDuelingEngine.Tags
 		{
 			return new ConditionalTagsTag(this, duration);
 		}
-
-		public TagCollection Tags { get; }
 
 		public override void Serialize(ISerializer serializer)
 		{

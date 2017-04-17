@@ -93,6 +93,7 @@
     <Compile Include="TagScope.cs" />
     <Compile Include="Tags\ConditionalTagsTag.cs" />
     <Compile Include="Tags\ConditionTag.cs" />
+    <Compile Include="Tags\ConditionTagBase.cs" />
     <Compile Include="Tags\IAddableTag.cs" />
     <Compile Include="Tags\IntValueTag.cs" />
     <Compile Include="Tags\ISubtractableTag.cs" />
