@@ -22,7 +22,7 @@ namespace CrystalDuelingEngine.Rules
 			Actions = new List<Action>().AsReadOnly();
 			Results = new List<Result>().AsReadOnly();
 			Name = name;
-			m_lookup = lookup;
+			StringLookup = lookup;
 		}
 
 		public string SerializationName => nameof(EntityRules);
@@ -61,7 +61,9 @@ namespace CrystalDuelingEngine.Rules
 		public ReadOnlyCollection<Action> Actions { get; set; }
 		public ReadOnlyCollection<Result> Results { get; set; }
 
-		private Dictionary<ActionMatrixEntryKey, ActionMatrixEntry> ActionMatrix { get; }
+		public Dictionary<ActionMatrixEntryKey, ActionMatrixEntry> ActionMatrix { get; }
+
+		public StringLookup StringLookup { get; }
 
 		public void AddToActionMatrix(string attackerActionId, IEnumerable<Tuple<string, string>> defenderActionIdToResults)
 		{
@@ -88,7 +90,7 @@ namespace CrystalDuelingEngine.Rules
 
 		public string Lookup(string key)
 		{
-			return m_lookup.Lookup(key);
+			return StringLookup.Lookup(key);
 		}
 
 		public string RenderForLog()
@@ -106,7 +108,7 @@ namespace CrystalDuelingEngine.Rules
 			serializer.StartObject(this);
 
 			serializer.SerializeValue(nameof(Name), Name);
-			serializer.SerializeValue("Lookup", m_lookup);
+			serializer.SerializeValue("Lookup", StringLookup);
 			serializer.SerializeValue(nameof(PreBattleEffects), PreBattleEffects);
 			serializer.SerializeValue(nameof(PostBattleEffects), PostBattleEffects);
 			serializer.SerializeValue(nameof(PreTurnEffects), PreTurnEffects);
@@ -123,7 +125,7 @@ namespace CrystalDuelingEngine.Rules
 		{
 			ActionMatrix = new Dictionary<ActionMatrixEntryKey, ActionMatrixEntry>();
 			Name = deserializer.GetValue<string>(nameof(Name));
-			m_lookup = deserializer.GetValue<StringLookup>("Lookup");
+			StringLookup = deserializer.GetValue<StringLookup>("Lookup");
 			PreBattleEffects = deserializer.GetValues<EffectBase>(nameof(PreBattleEffects)).ToList().AsReadOnly();
 			PostBattleEffects = deserializer.GetValues<EffectBase>(nameof(PostBattleEffects)).EmptyIfNull().ToList().AsReadOnly();
 			PreTurnEffects = deserializer.GetValues<EffectBase>(nameof(PreTurnEffects)).EmptyIfNull().ToList().AsReadOnly();
@@ -138,7 +140,5 @@ namespace CrystalDuelingEngine.Rules
 		{
 			SerializationManager.RegisterSerializable(nameof(EntityRules), x => new EntityRules(x));
 		}
-
-		readonly StringLookup m_lookup;
 	}
 }
