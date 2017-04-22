@@ -74,6 +74,13 @@ namespace CrystalDuelingEngine.Rules
 			}
 		}
 
+		public void SetActionMatrix(IEnumerable<ActionMatrixEntry> entries)
+		{
+			ActionMatrix.Clear();
+			foreach (var entry in entries)
+				ActionMatrix[entry.Key] = entry;
+		}
+
 		public Result GetResult(string attackerActionKey, string defenderActionKey)
 		{
 			ActionMatrixEntry entry;

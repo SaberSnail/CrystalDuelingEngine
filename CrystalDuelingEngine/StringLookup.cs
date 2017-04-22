@@ -18,6 +18,11 @@ namespace CrystalDuelingEngine
 			m_lookup = values.EmptyIfNull().ToDictionary(x => x.Item1, x => x.Item2);
 		}
 
+		public IReadOnlyCollection<Tuple<string, string>> Values
+		{
+			get { return m_lookup.Select(x => Tuple.Create(x.Key, x.Value)).ToList().AsReadOnly(); }
+		}
+
 		public string SerializationName => nameof(StringLookup);
 
 		public string Lookup(string key)
