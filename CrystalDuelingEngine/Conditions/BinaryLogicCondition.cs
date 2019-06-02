@@ -54,7 +54,7 @@ namespace CrystalDuelingEngine.Conditions
 		{
 			if (Children.Count < 2)
 			{
-				errors.Add(OurResources.InvalidConditionMissingChildren.FormatCurrentUiCulture(GetType().Name, 2));
+				errors.Add(OurResources.InvalidConditionMissingChildren.FormatCurrentCulture(GetType().Name, 2));
 				return false;
 			}
 

@@ -53,7 +53,7 @@ namespace CrystalDuelingEngine.Conditions
 		{
 			if (Child == null)
 			{
-				errors.Add(OurResources.InvalidConditionMissingChild.FormatCurrentUiCulture(GetType().Name));
+				errors.Add(OurResources.InvalidConditionMissingChild.FormatCurrentCulture(GetType().Name));
 				return false;
 			}
 

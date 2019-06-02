@@ -53,12 +53,12 @@ namespace CrystalDuelingEngine.Conditions
 		{
 			if (MatchScopes == TagScope.None)
 			{
-				errors.Add(OurResources.InvalidConditionMissingMatchScope.FormatCurrentUiCulture(GetType().Name));
+				errors.Add(OurResources.InvalidConditionMissingMatchScope.FormatCurrentCulture(GetType().Name));
 				return false;
 			}
 			if (MatchKey == null)
 			{
-				errors.Add(OurResources.InvalidConditionMissingMatchKey.FormatCurrentUiCulture(GetType().Name));
+				errors.Add(OurResources.InvalidConditionMissingMatchKey.FormatCurrentCulture(GetType().Name));
 				return false;
 			}
 
